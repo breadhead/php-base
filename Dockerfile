@@ -1,7 +1,5 @@
 FROM php:7.2.8-fpm-alpine
 
-ENV php_vars /usr/local/etc/php/conf.d/docker-vars.ini
-
 RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
     echo /etc/apk/respositories && \
     apk update && \
