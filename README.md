@@ -6,7 +6,7 @@ Base image for PHP app
 Create the following `Dockerfile` in your project dir:
 
 ```
-FROM igorkamyshev/php-base
+FROM breadgheadhub/php-base
 
 ENV APP_ENV=prod
 ENV APP_DEBUG=0
