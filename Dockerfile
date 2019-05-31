@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-alpine
+FROM php:7.2.7-fpm-alpine
 
 RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
     echo /etc/apk/respositories && \
