@@ -9,7 +9,13 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     curl -sS https://getcomposer.org/installer -o composer-setup.php && \
     php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
-RUN sed -i -e "s/^;clear_env = no$/clear_env = no/" /usr/local/etc/php-fpm.d/www.conf
+RUN sed -i -e "s/^;clear_env = no$/clear_env = no/" /usr/local/etc/php-fpm.d/www.conf && \
+    sed -i -e "s/pm = dynamic/pm = ${FPM_PM}/g" /usr/local/etc/php-fpm.d/www.conf && \
+    sed -i -e "s/pm.max_children = 5/pm.max_children = ${FPM_PM_MAX_CHILDREN}/g" /usr/local/etc/php-fpm.d/www.conf && \
+    sed -i -e "s/pm.start_servers = 2/pm.start_servers = ${FPM_PM_START_SERVERS}/g" /usr/local/etc/php-fpm.d/www.conf && \
+    sed -i -e "s/pm.min_spare_servers = 1/pm.min_spare_servers = ${FPM_PM_MIN_SPARE_SERVICE}/g" /usr/local/etc/php-fpm.d/www.conf && \
+    sed -i -e "s/pm.max_spare_servers = 3/pm.max_spare_servers = ${FPM_PM_MAX_SPARE_SERVICE}/g" /usr/local/etc/php-fpm.d/www.conf
+   
 
 ADD config/supervisord.conf /etc/supervisord.conf
 ADD config/nginx.conf /etc/nginx/nginx.conf
